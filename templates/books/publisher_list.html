@@ -5,6 +5,7 @@
     <ul>
         {% for publisher in object_list %}
             <li><a href="{% url 'books:publisher_detail' publisher.id %}">{{ publisher.name }}</a></li>
+            <li><a href="{{ publisher.get_absolute_url }}">{{ publisher.name }}-alter way</a></li>
         {% endfor %}
     </ul>
 {% endblock content %}

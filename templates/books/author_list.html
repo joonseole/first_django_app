@@ -5,6 +5,7 @@
     <ul>
         {% for author in object_list %}
             <li><a href="{% url 'books:author_detail' author.id %}">{{ author.name }}</a></li>
+            <li><a href="{{ author.get_absolute_url }}">{{ author.name }}-second way</a></li>
         {% endfor %}
     </ul>
 {% endblock content %}
