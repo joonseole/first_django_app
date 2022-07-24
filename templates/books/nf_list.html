@@ -1,0 +1,11 @@
+{% extends "base_dimen.html" %}
+
+{% block content %}
+    <h2>NF List</h2>
+    <hr>
+    <ul>
+        {% for nf in object_list %}
+            <li><a href="{% url 'books:nf_detail' nf.id %}">(pk:{{ nf.id }}){{ nf.name }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock content %}

@@ -1,0 +1,12 @@
+{% extends "base_dimen.html" %}
+
+{% block content %}
+    <h2>Oppkg List</h2>
+    <ul>
+        {% for oppkg in object_list %}
+            <li><a href="{% url 'books:oppkg_detail' oppkg.id %}">(pk:{{ oppkg.id }}){{ oppkg }}</a></li>
+        {% endfor %}
+    </ul>
+    
+    <a href="{% url 'books:oppkg_create' %}" class="btn btn-primary">Oppkg 신규등록</a>
+{% endblock content %}

@@ -1,0 +1,11 @@
+{% extends "base_dimen.html" %}
+
+{% block content %}
+    <h2>NF Detail</h2>
+    <ul>
+        (pk: {{ object.pk }}) : {{ object.name }}
+    </ul>
+    <a href="{% url 'books:nf_update' object.pk %}" class="btn btn-primary">NF변경</a>
+    <a href="{% url 'books:nf_delete' object.id %}" class="btn btn-primary">NF삭제</a>
+    </form>
+{% endblock content %}

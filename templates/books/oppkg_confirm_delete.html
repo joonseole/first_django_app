@@ -1,0 +1,13 @@
+{% extends "base_dimen.html" %}
+
+{% block content %}
+    <h2>Oppkg Delete</h2>
+    <h6> this is : {{ object.id }} : {{ object.nfs.all }}
+    <form method="POST" >
+        {% csrf_token %}
+        {{ form.as_p }}
+
+    <button type="submit" class="btn btn-primary">삭제</button>
+    </form>
+    <a href="{% url 'books:oppkg_list' %}" class="btn btn-secondary">삭제안함</a>
+{% endblock content %}

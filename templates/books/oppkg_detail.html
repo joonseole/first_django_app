@@ -1,0 +1,15 @@
+{% extends "base_dimen.html" %}
+
+{% block content %}
+    <h2>Oppkg Detail</h2>
+    <ul>
+        <li>(pk: {{ object.pk }}) : {{ object }}</li>
+        <li>{{ object.nfs.all }}</li>
+        <li>{{ object.created_at }}</li>
+        <li>{{ object.created_at }}</li>
+    </ul>
+    <a href="{% url 'books:oppkg_update' object.pk %}" class="btn btn-secondary">Oppkg 수정</a>
+    <a href="{% url 'books:oppkg_delete' object.id %}" class="btn btn-danger">삭제</a>
+        
+
+{% endblock content %}

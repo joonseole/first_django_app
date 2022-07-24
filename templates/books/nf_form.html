@@ -1,0 +1,10 @@
+{% extends "base_dimen.html" %}
+
+{% block content %}
+    <h2>NF Create</h2>
+    
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+    <input type="submit" name="submit">
+{% endblock content %}

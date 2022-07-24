@@ -1,0 +1,9 @@
+{% extends "base_dimen.html" %}
+
+{% block content %}
+    <h2>Oppkg Create</h2>
+    <form method="post" >
+        {% csrf_token %}
+        {{ form.as_p }}
+    <button type="submit" name='submit' value='Save' class="btn btn-primary">생성</button>
+{% endblock content %}
