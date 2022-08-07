@@ -1,0 +1,16 @@
+{% extends "base_dimen.html" %}
+{% load humanize %}
+{% block content %}
+    <h2>Subscriber Detail</h2>
+    <ul>
+        <li>(pk: {{ object.pk }}) : {{ object }}</li>
+        <li>{{ object.year }}</li>
+        <li>{{ object.num_5gm | intcomma }}</li>
+        <li>{{ object.num_4gm | intcomma }}</li>
+        <li>{{ object.num_5gf | intcomma }}</li>
+    </ul>
+    <a href="{% url 'books:subs_update' object.pk %}" class="btn btn-secondary">수정</a>
+    <a href="{% url 'books:subs_delete' object.id %}" class="btn btn-danger">삭제</a>
+        
+
+{% endblock content %}

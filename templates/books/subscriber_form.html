@@ -1,0 +1,30 @@
+{% extends "base_dimen.html" %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+{% block content %}
+    <h2>Subscriber Create/Update</h2>
+    <form method="post" >
+        {% csrf_token %}
+        <div class="mb-3 row">
+            <div class="col-md-3 mb-0">
+              {{ form.oppkg | as_crispy_field }}
+            </div>
+            <div class="col-md-3 mb-0">
+              {{ form.year | as_crispy_field }}
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <div class="col-md-3 mb-0">
+              {{ form.num_5gm | as_crispy_field | intcomma }}
+            </div>
+            <div class="col-md-3 mb-0">
+              {{ form.num_4gm | as_crispy_field | intcomma }}
+            </div>
+            <div class="col-md-3 mb-0">
+                {{ form.num_5gf | as_crispy_field | intcomma }}
+              </div>
+        </div>
+        <br>
+        <button type="submit" name='submit' class="btn btn-primary">생성/수정</button>
+    </form>
+{% endblock content %}

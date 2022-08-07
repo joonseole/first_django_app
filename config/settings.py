@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'books.apps.BooksConfig',
     'common.apps.CommonConfig',
     'pybo.apps.PyboConfig',
+    'crispy_forms',
+    'django.contrib.humanize',
 ]
 
 MIDDLEWARE = [

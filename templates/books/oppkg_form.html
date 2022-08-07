@@ -1,9 +1,32 @@
 {% extends "base_dimen.html" %}
-
+{% load crispy_forms_tags %}
 {% block content %}
     <h2>Oppkg Create</h2>
-    <form method="post" >
-        {% csrf_token %}
-        {{ form.as_p }}
-    <button type="submit" name='submit' value='Save' class="btn btn-primary">생성</button>
+    
+        <form method="post" >
+            {% csrf_token %}
+            <div class="mb-3 row">
+                <div class="col-md-2 mb-0">
+                  {{ form.operator | as_crispy_field }}
+                </div>
+                <div class="col-md-2 mb-0">
+                  {{ form.sw_pkg | as_crispy_field }}
+                </div>
+            </div>
+            <br>
+            <div class="mb-3 row">
+                <div class="col-md-6 mb-0">
+                    {{ form.nfs | as_crispy_field }}
+                </div>
+                <div class="col-md-2 mb-0">
+                    {{ form.sess_5gm | as_crispy_field }}
+                </div>
+            </div>
+            <hr>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <button type="submit" name='submit' value='Save' class="btn btn-primary">생성</button>
+            </div>
+        </form>
+    
+
 {% endblock content %}

@@ -1,0 +1,12 @@
+{% extends "base_dimen.html" %}
+
+{% block content %}
+    <h2>Subscriber List</h2>
+    <ul>
+        {% for subs in object_list %}
+            <li><a href="{% url 'books:subs_detail' subs.id %}">(pk:{{ subs.id }}){{ subs }}</a></li>
+        {% endfor %}
+    </ul>
+    
+    <a href="{% url 'books:subs_create' %}" class="btn btn-primary">Subscriber 신규등록</a>
+{% endblock content %}

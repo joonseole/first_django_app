@@ -1,11 +1,11 @@
 {% extends "base_dimen.html" %}
-
+{% load crispy_forms_tags %}
 {% block content %}
     <h2>Oppkg Update</h2>
     <h6> this is : {{ object.id }} : {{ object.nfs.all }}
     <form method="POST" >
         {% csrf_token %}
-        {{ form.as_p }}
+        {{ form | crispy }}
 
     <button type="submit" class="btn btn-primary" name="submit">변경</button>
 {% endblock content %}

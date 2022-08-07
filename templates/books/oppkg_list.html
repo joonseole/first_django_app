@@ -1,12 +1,55 @@
 {% extends "base_dimen.html" %}
-
+{% load humanize %}
 {% block content %}
     <h2>Oppkg List</h2>
+    <div class="row mb-3">
+        <div class="col-md-4">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search for..." id="search-input">
+            <span class="input-group-btn">
+            <button class="btn btn-secondary" type="button" onclick="searchData();">Go!</button>
+            </span>
+        </div>
+        </div>
+    </div>
+    {% if search_info %}<small class="text-muted">{{ search_info }}</small>{% endif %}
     <ul>
         {% for oppkg in object_list %}
             <li><a href="{% url 'books:oppkg_detail' oppkg.id %}">(pk:{{ oppkg.id }}){{ oppkg }}</a></li>
+            {% for subscriber in subscribers %}
+                {% if subscriber.oppkg == oppkg %}
+                    <li>{{ subscriber.year }}:{{ subscriber.num_5gm | intcomma }}:{{ subscriber.num_4gm | intcomma }}</li>
+                {% endif %}
+            {% endfor %}
         {% endfor %}
     </ul>
-    
-    <a href="{% url 'books:oppkg_create' %}" class="btn btn-primary">Oppkg 신규등록</a>
+    <hr>
+    {% comment %} 버튼은 로그인한 staff나 superuser에게만 {% endcomment %}
+    {% if user.is_authenticated %}
+    {% if user.is_staff or user.is_superuser %}
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <a href="{% url 'books:oppkg_create' %}" class="btn btn-primary">Oppkg 신규등록</a>
+        </div>
+    {% endif %}
+    {% endif %}
 {% endblock content %}
+
+{% block script %}
+<script>
+    function searchData(){
+      let searchValue = document.getElementById('search-input').value.trim();
+      if (searchValue.length >1) {
+        location.href="/books/search/" + searchValue + "/";
+      } else {
+        alert('검색어 (' + searchValue +') 이/가 너무 짧음');
+      }
+    };
+  
+    document.getElementById('search-input').addEventListener('keyup',function(event)
+    {
+      if(event.key=='Enter'){
+        searchData();
+      }
+    });
+  </script>
+{% endblock %}

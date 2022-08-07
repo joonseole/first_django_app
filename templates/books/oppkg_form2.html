@@ -1,0 +1,29 @@
+{% extends "base_dimen.html" %}
+
+{% block content %}
+    <h2>Oppkg Create</h2>
+    <div class='form-group container'>
+        <form method="post" >
+            {% csrf_token %}
+            <div class="row g-3 align-items-center my-3">
+                <div class="col-auto">
+                    {{ form.operator.label }} {{ form.operator }}
+                </div>
+                <div class="col-auto">
+                    {{ form.sw_pkg.label }} {{ form.sw_pkg }}
+                </div>
+            </div>
+            {{ form.nfs.label }}
+            <div class="btn-group my-3" data-bs-toggle="buttons"> 
+                
+                {% for checkbox in form.nfs %}
+                    <label class="btn btn-outline-dark btn-sm">
+                    {{ checkbox.tag }} {{ checkbox.choice_label }}
+                    </label>
+                {% endfor %}
+            </div><br><hr>
+        <button type="submit" name='submit' value='Save' class="btn btn-primary">생성</button>
+        </form>
+    </div>
+
+{% endblock content %}

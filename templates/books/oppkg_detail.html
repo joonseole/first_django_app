@@ -2,14 +2,45 @@
 
 {% block content %}
     <h2>Oppkg Detail</h2>
-    <ul>
-        <li>(pk: {{ object.pk }}) : {{ object }}</li>
-        <li>{{ object.nfs.all }}</li>
-        <li>{{ object.created_at }}</li>
-        <li>{{ object.created_at }}</li>
+    <ul class="list-group">
+        <li class="list-group-item">(pk: {{ object.pk }}) : {{ object }}</li>
+        <li class="list-group-item">NFs :{{ object.nfs.all }}</li>
+        <li class="list-group-item">Created at :{{ object.created_at }}</li>
+        <li class="list-group-item">Updated at :{{ object.updated_at }}</li>
+        <li class="list-group-item">Author :{{ object.author }}</li>
     </ul>
-    <a href="{% url 'books:oppkg_update' object.pk %}" class="btn btn-secondary">Oppkg 수정</a>
-    <a href="{% url 'books:oppkg_delete' object.id %}" class="btn btn-danger">삭제</a>
-        
+    <ul>
+    {% for subscriber in subscribers %}
+    <li>{{ subscriber.year }}:{{ subscriber.num_5gm}}:{{ subscriber.num_4gm}}</li>
+    {% endfor %}
+    </ul>
+    <hr>
+    {% comment %} 버튼은 로그인한 작성자나 superuser에게만 {% endcomment %}
+    {% if user.is_authenticated %}
+    {% if user == object.author or user.is_superuser %}
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <a href="{% url 'books:oppkg_update' object.pk %}" class="btn btn-secondary">Oppkg 수정</a>
+            <a role="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">삭제</a>
+        </div>
+    {% endif %}
+    {% endif %}
 
+    {% comment %} Modal {% endcomment %}
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="deleteModalLabel">삭제</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <del>{{ object }}</del>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <a role="button" href="{% url 'books:oppkg_delete' object.id %}" class="btn btn-danger" >Delete</a>
+            </div>
+          </div>
+        </div>
+      </div>
 {% endblock content %}

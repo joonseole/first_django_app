@@ -14,7 +14,8 @@ urlpatterns = [
     path('oppkg/<int:pk>/', views.OppkgDetail.as_view(), name="oppkg_detail"),
     path('oppkg/create', views.OppkgCreate.as_view(), name='oppkg_create'),
     path('oppkg/<int:pk>/update', views.OppkgUpdate.as_view(), name='oppkg_update'),
-    path('oppkg/<int:pk>/delete', views.OppkgDelete.as_view(), name='oppkg_delete'),
+    path('oppkg/<int:pk>/delete', views.oppkg_delete, name='oppkg_delete'),
+    path('search/<str:q>/', views.OppkgSearch.as_view()),
 
     path('subs/', views.SubsList.as_view(), name="subs_list"),
     path('subs/<int:pk>/', views.SubsDetail.as_view(), name="subs_detail"),
