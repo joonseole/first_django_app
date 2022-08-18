@@ -8,6 +8,7 @@ from books.models import Book, Author, Oppkg, Publisher, Subscriber, Nf
 from django.urls import reverse
 from django.core.exceptions import PermissionDenied
 from django.db.models import Q
+from django.contrib import messages
 
 class NfListView(ListView):
     model = Nf
@@ -99,6 +100,7 @@ class OppkgUpdate(UpdateView):
 
 def oppkg_delete(request, pk):
     oppkg = get_object_or_404(Oppkg, pk=pk)
+    messages.warning(request,"지웠습니다.")
     if request.user.is_authenticated and (request.user == oppkg.author or request.user.is_superuser):
         oppkg.delete()
         return redirect('books:oppkg_list')
