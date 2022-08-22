@@ -3,7 +3,7 @@ from django.views.generic.base import TemplateView
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from books.forms import NfForm, OppkgForm
+from books.forms import NfForm, OppkgForm, SubsInlineFormSet
 from books.models import Book, Author, Oppkg, Publisher, Subscriber, Nf
 from django.urls import reverse
 from django.core.exceptions import PermissionDenied
@@ -82,6 +82,36 @@ class OppkgCreate(LoginRequiredMixin, CreateView):
 
     def get_success_url(self):
         return reverse('books:oppkg_list')
+
+class OppkgAdd(LoginRequiredMixin, CreateView):
+    model = Oppkg
+    template_name = "books/oppkg_add_form.html"
+    form_class = OppkgForm
+
+    def get_context_data(self, **kwargs):
+        context = super(OppkgAdd, self).get_context_data(**kwargs)
+        if self.request.POST:
+            context['formset'] = SubsInlineFormSet(self.request.POST)
+        else:
+            context['formset'] = SubsInlineFormSet()
+        return context
+
+    def form_valid(self, form):
+        context = self.get_context_data()
+        formset = context['formset']
+        if formset.is_valid():
+            current_user = self.request.user
+            if current_user.is_authenticated and (current_user.is_staff or current_user.is_superuser):
+                form.instance.author = current_user # user를 자동으로 채움
+            else:
+                return self.render_to_response(self.get_context_data(form=form))
+            self.object = form.save()
+            formset.instance = self.object
+            formset.save()
+            return redirect('books:oppkg_list')
+        else:
+            return self.render_to_response(self.get_context_data(form=form))
+
 
 class OppkgUpdate(UpdateView):
     model = Oppkg

@@ -1,5 +1,6 @@
 from django import forms
-from books.models import Nf, Oppkg
+from django.forms.models import inlineformset_factory
+from books.models import Nf, Oppkg, Subscriber
 
 class NfForm(forms.ModelForm):
     class Meta:
@@ -26,3 +27,7 @@ class OppkgForm(forms.ModelForm):
             'sess_5gm' : '5G mobile session수 : '
         }
 
+SubsInlineFormSet = inlineformset_factory(Oppkg, Subscriber,
+    fields = ['year', 'num_5gm', 'num_4gm', 'num_5gf'],
+    extra = 3
+)

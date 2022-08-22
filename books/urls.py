@@ -13,6 +13,7 @@ urlpatterns = [
     path('oppkg/', views.OppkgList.as_view(), name="oppkg_list"),
     path('oppkg/<int:pk>/', views.OppkgDetail.as_view(), name="oppkg_detail"),
     path('oppkg/create', views.OppkgCreate.as_view(), name='oppkg_create'),
+    path('oppkg/add', views.OppkgAdd.as_view(), name='oppkg_add'),
     path('oppkg/<int:pk>/update', views.OppkgUpdate.as_view(), name='oppkg_update'),
     path('oppkg/<int:pk>/delete', views.oppkg_delete, name='oppkg_delete'),
     path('search/<str:q>/', views.OppkgSearch.as_view()),

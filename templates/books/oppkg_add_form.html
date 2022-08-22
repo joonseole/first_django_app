@@ -1,0 +1,59 @@
+{% extends "base_dimen.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <h2>Oppkg - Subs Create</h2>
+    
+        <form method="post" >
+            {% csrf_token %}
+            {% if form.errors %}
+            <p class="errornote">Wrong! Please correct the FORM erros</p>
+            {% endif %}
+            {% if formset.errors %}
+            <p class="errornote">Wrong! Please correct the FORMSET erros</p>
+            {% endif %}
+
+            <h4> Oppkg add </h4>
+            <div class="mb-3 row">
+                <div class="col-md-2 mb-0">
+                  {{ form.operator | as_crispy_field }}
+                </div>
+                <div class="col-md-2 mb-0">
+                  {{ form.sw_pkg | as_crispy_field }}
+                </div>
+            </div>
+            <br>
+            <div class="mb-3 row">
+                <div class="col-md-6 mb-0">
+                    {{ form.nfs | as_crispy_field }}
+                </div>
+                <div class="col-md-2 mb-0">
+                    {{ form.sess_5gm | as_crispy_field }}
+                </div>
+            </div>
+            <hr>
+            <h4> Subs add </h4>
+            {{ formset.management_form }}
+            {% for form in formset %}
+                {{ form.id }}
+            <fieldset class="aligned">
+                <div class="form-row">
+                    {{ form.year.label_tag }} {{ form.year }}
+                </div>
+                <div class="form-row">
+                    {{ form.num_5gm.label_tag }} {{ form.num_5gm }}
+                </div>
+                <div class="form-row">
+                    {{ form.num_4gm.label_tag }} {{ form.num_4gm }}
+                </div>
+                <div class="form-row">
+                    {{ form.num_5gf.label_tag }} {{ form.num_5gf }}
+                </div>
+            </fieldset>
+            {% endfor %}
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <button type="submit" name='submit' value='Save' class="btn btn-primary">생성</button>
+            </div>
+        </form>
+    
+
+{% endblock content %}

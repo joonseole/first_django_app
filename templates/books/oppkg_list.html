@@ -28,7 +28,7 @@
     {% if user.is_authenticated %}
     {% if user.is_staff or user.is_superuser %}
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <a href="{% url 'books:oppkg_create' %}" class="btn btn-primary">Oppkg 신규등록</a>
+        <a href="{% url 'books:oppkg_add' %}" class="btn btn-primary">Oppkg-Subs 등록</a>
         </div>
     {% endif %}
     {% endif %}
