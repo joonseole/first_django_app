@@ -93,7 +93,9 @@ class OppkgAdd(LoginRequiredMixin, CreateView):
         if self.request.POST:
             context['formset'] = SubsInlineFormSet(self.request.POST)
         else:
-            context['formset'] = SubsInlineFormSet()
+            context['formset'] = SubsInlineFormSet(initial=[
+                {'year': 1,'num_5gm': 0,'num_4gm': 0,'num_5gf': 0,}
+                ])
         return context
 
     def form_valid(self, form):
